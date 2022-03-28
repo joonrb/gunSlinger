@@ -59,4 +59,9 @@ public class player : character
         UpdateMotor(new Vector3(x,y,0));
     }
 
+    protected override void death(){
+        Destroy(gameObject);
+        Debug.Log("You Died");
+    }
+
 }

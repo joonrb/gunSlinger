@@ -24,7 +24,7 @@ public class character : MonoBehaviour
             lastImmune = Time.time;
             hitPoint -= dmg.damageAmount;
             pushDirection = (transform.position - dmg.origin).normalized * dmg.pushForce;
-            GameManager.instance.showText(dmg.damageAmount.ToString(),20,Color.red, transform.position,Vector3.up * 10, 0.5f);
+            GameManager.instance.showText(dmg.damageAmount.ToString(),30,Color.red, transform.position,Vector3.up * 10, 0.5f);
         }
 
         

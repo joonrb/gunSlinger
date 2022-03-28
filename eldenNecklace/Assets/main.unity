@@ -1521,6 +1521,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1878768382}
+  - component: {fileID: 1878768384}
   - component: {fileID: 1878768383}
   m_Layer: 5
   m_Name: floatingTextManager
@@ -1562,6 +1563,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textContainer: {fileID: 1878768381}
   textPrefab: {fileID: 2128825810749426951, guid: 29171d658468220488dabf4db4c29bae, type: 3}
+--- !u!222 &1878768384
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1878768381}
+  m_CullTransparentMesh: 1
 --- !u!1 &2066422513
 GameObject:
   m_ObjectHideFlags: 0
@@ -1685,12 +1694,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04669513263397d45bd538d894127d20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitPoint: 1
+  hitPoint: 2
   maxHitPoint: 5
   pushRecoverySpeed: 0.2
   xpValue: 1
-  triggerLength: 1
-  chaseLength: 5
+  placeBulletHere: {fileID: 4332277062927623893, guid: ee379de993797824b91df8c5801d9ffa, type: 3}
   filter:
     useTriggers: 0
     useLayerMask: 0
@@ -1756,7 +1764,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bf221355e1348c5499819a91f98e706b, type: 2}
+  - {fileID: 2100000, guid: e2663f02fe9e06c4897d8367dab4cf0c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

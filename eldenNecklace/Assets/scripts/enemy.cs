@@ -8,12 +8,15 @@ public class enemy : character
     public int xpValue = 1;
 
     //logic
-    public float triggerLength = 1;
-    public float chaseLength = 5;
-    private bool chasing;
     private bool playerCollision;
     private Transform playerTransform;
     private Vector3 startingPosition;
+    private Vector3 barrel = new Vector3(-.13f,0,0);
+    public GameObject placeBulletHere;
+
+    //random motion
+    private int nextMotion = 0;
+    private Vector3 randomMovement;
 
     //hitbox
     private BoxCollider2D hitBox;
@@ -29,49 +32,50 @@ public class enemy : character
         hitBox = transform.GetChild(0).GetComponent<BoxCollider2D>();
     }
 
+    private float getRandomMovementValue(){
+        int dice = Random.Range(0,2);
+        float result = 0;
+        if(dice == 0) result = -.32f;
+        else if(dice == 1) result = .32f;
+
+        return result;
+    }
+
+    //Random movement function
+    private Vector3 randomMovementExec(){
+        Vector3 temp = new Vector3(0,0,0);
+        int motionSwitch = Random.Range(0,6);
+
+        if(motionSwitch < 4){
+            temp = new Vector3(0,0,0);
+        }
+        else if(motionSwitch == 4){
+            temp = new Vector3(0,getRandomMovementValue(),0);
+        }
+        else if(motionSwitch == 5){
+            temp = new Vector3(getRandomMovementValue(),0,0);
+        }
+        
+        return temp;
+    }
+
     private void FixedUpdate(){
-        //checking if player is in range
-        
-        if(Vector3.Distance(playerTransform.position, startingPosition) < chaseLength){
-            //start chasing
-            
-            if(Vector3.Distance(playerTransform.position, startingPosition) < triggerLength){
-                chasing = true;
-                
-            }
-
-            if(chasing){
-                if(!playerCollision){
-                    UpdateMotor((playerTransform.position - transform.position).normalized);
-                    
-                }
-            }
-            else{
-                UpdateMotor(startingPosition - transform.position);
-            }
+        //random movements
+        if(Time.time >=nextMotion){
+            nextMotion = Mathf.FloorToInt(Time.time) + 1;
+            randomMovement = randomMovementExec();
+            shoot();
         }
-        else{
-            UpdateMotor(startingPosition - transform.position);
-            chasing = false;
-        }
-        
-        //check for collision
-        playerCollision = false;
-        boxCollider.OverlapCollider(filter, hits);
-        for(int i = 0; i < hits.Length; i++){
-            if(hits[i] == null)
-                continue;
-
-            if(hits[i].tag == "Character" && hits[i].name == "player"){
-                playerCollision = true;
-            }
-            hits[i] = null;
-        }
+        UpdateMotor(randomMovement);
     }
 
     protected override void death(){
         Destroy(gameObject);
         GameManager.instance.exp += xpValue;
         GameManager.instance.showText("+" + xpValue + "xp", 30, Color.blue, transform.position, Vector3.up * 20, 0.75f);
+    }
+
+    private void shoot(){
+        Instantiate(placeBulletHere, transform.position + barrel, Quaternion.identity);
     }
 }
