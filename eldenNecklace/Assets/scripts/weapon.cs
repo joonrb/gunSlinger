@@ -35,7 +35,8 @@ public class weapon : MonoBehaviour
         else if(playerObject.transform.localScale.x == -1){
             barrel = new Vector3(-0.13f,0,0);
         }    
-        Instantiate(myPrefab, transform.position + barrel, Quaternion.identity);
+        Instantiate(myPrefab, transform.position + barrel, transform.rotation);
+        Debug.Log(transform.rotation);
     }
 }
 

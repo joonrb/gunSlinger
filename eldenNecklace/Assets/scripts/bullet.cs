@@ -22,6 +22,7 @@ public class bullet : collidable
     }
 
     private void FixedUpdate(){
+        
         if(playerTransform.localScale.x == 1){
             onMotionR = true;
             if(onMotionR && !onMotionL){

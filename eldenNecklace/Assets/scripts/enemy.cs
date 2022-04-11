@@ -11,7 +11,7 @@ public class enemy : character
     private bool playerCollision;
     private Transform playerTransform;
     private Vector3 startingPosition;
-    private Vector3 barrel = new Vector3(-.13f,0,0);
+    private Vector3 barrel = new Vector3(-0.2f,0,0);
     public GameObject placeBulletHere;
 
     //random motion
