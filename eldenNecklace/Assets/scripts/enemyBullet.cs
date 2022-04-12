@@ -40,5 +40,8 @@ public class enemyBullet : collidable
         if(coll.tag == "wall"){
             Destroy(gameObject);
         }
+        if(coll.tag == "shield"){
+            Destroy(gameObject);
+        }
     }
 }

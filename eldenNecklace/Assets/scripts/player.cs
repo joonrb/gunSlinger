@@ -11,10 +11,15 @@ public class player : character
     public Sprite upSprite;
     public Sprite normalSprite;
     public bool faceUp = false;
+    public GameObject gun;
+    public GameObject shield;
     
     protected override void Start(){
         base.Start();
+        gun = transform.GetChild(0).gameObject;
+        shield = transform.GetChild(1).gameObject;
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        shield.SetActive(false);
     }
 
     protected override void UpdateMotor(Vector3 input){
@@ -52,11 +57,19 @@ public class player : character
         }
     }
 
-    private void FixedUpdate(){
+    private void Update(){
         float x = Input.GetAxisRaw("Horizontal");
         float y = Input.GetAxisRaw("Vertical");
 
         UpdateMotor(new Vector3(x,y,0));
+        if(Input.GetKeyDown(KeyCode.C)){
+            shield.SetActive(true);
+            gun.SetActive(false);
+        }
+        if(Input.GetKeyUp(KeyCode.C)){
+            shield.SetActive(false);
+            gun.SetActive(true);
+        }
     }
 
     protected override void death(){

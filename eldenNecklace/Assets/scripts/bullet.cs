@@ -63,5 +63,8 @@ public class bullet : collidable
         if(coll.tag == "wall"){
             Destroy(gameObject);
         }
+        if(coll.tag == "shield"){
+            Destroy(gameObject);
+        }
     }
 }

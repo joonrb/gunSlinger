@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Character
   - wall
+  - shield
   layers:
   - Default
   - TransparentFX
@@ -16,7 +17,7 @@ TagManager:
   - Actor
   - 
   - Blocking
-  - 
+  - shield
   - 
   - 
   - 
