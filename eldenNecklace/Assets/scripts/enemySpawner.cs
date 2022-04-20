@@ -12,10 +12,11 @@ public class enemySpawner : MonoBehaviour
     private SpriteRenderer rend;
     private Vector3 spawnPosition;
     private float randomXpo, randomYpo;
+    float difficulty = 10f;
 
     void Start()
     {
-        InvokeRepeating("spawnNewEnemy", 0f, 20f);
+        InvokeRepeating("spawnNewEnemy", 1f, difficulty);
     }
 
     private void spawnNewEnemy(){
@@ -43,5 +44,8 @@ public class enemySpawner : MonoBehaviour
         spawnPosition = new Vector3(randomXpo, randomYpo, 0f);
         newEnemy = Instantiate(enemy, spawnPosition, Quaternion.identity);
         rend = newEnemy.GetComponent<SpriteRenderer>();
+        if(difficulty > 1.0f){
+            difficulty -= 0.5f;
+        }
     }
 }

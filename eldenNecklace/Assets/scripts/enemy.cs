@@ -67,6 +67,12 @@ public class enemy : character
             shoot();
         }
         UpdateMotor(randomMovement);
+        if(playerTransform.position.x > transform.position.x){
+            barrel = new Vector3(0.15f,0,0);
+        }
+        else if(playerTransform.position.x < transform.position.x){
+            barrel = new Vector3(-0.15f,0,0);
+        }
     }
 
     protected override void death(){
@@ -76,6 +82,6 @@ public class enemy : character
     }
 
     private void shoot(){
-        Instantiate(placeBulletHere, transform.position + barrel, Quaternion.identity);
+        Instantiate(placeBulletHere, transform.position + barrel, transform.rotation);
     }
 }

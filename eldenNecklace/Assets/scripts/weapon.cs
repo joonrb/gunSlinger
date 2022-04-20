@@ -29,11 +29,11 @@ public class weapon : MonoBehaviour
     }
 
     private void shoot(){
-        if(playerObject.transform.localScale.x == 1){
-            barrel = new Vector3(0.13f,0,0);
-        }
-        else if(playerObject.transform.localScale.x == -1){
+        if(playerObject.transform.rotation == Quaternion.Euler(0,180,0)){
             barrel = new Vector3(-0.13f,0,0);
+        }
+        else{
+            barrel = new Vector3(0.13f,0,0);
         }    
         Instantiate(myPrefab, transform.position + barrel, transform.rotation);
         Debug.Log(transform.rotation);
