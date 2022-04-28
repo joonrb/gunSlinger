@@ -32,11 +32,20 @@ public class enemy : character
         hitBox = transform.GetChild(0).GetComponent<BoxCollider2D>();
     }
 
-    private float getRandomMovementValue(){
+    private float getRandomXMovementValue(){
         int dice = Random.Range(0,2);
         float result = 0;
-        if(dice == 0) result = -.32f;
-        else if(dice == 1) result = .32f;
+        if(playerTransform.position.x > this.transform.position.x) result = .32f;
+        else if(playerTransform.position.x < this.transform.position.x) result = -.32f;
+
+        return result;
+    }
+
+    private float getRandomYMovementValue(){
+        int dice = Random.Range(0,2);
+        float result = 0;
+        if(playerTransform.position.y > this.transform.position.x) result = .32f;
+        else if(playerTransform.position.y < this.transform.position.x) result = -.32f;
 
         return result;
     }
@@ -50,16 +59,16 @@ public class enemy : character
             temp = new Vector3(0,0,0);
         }
         else if(motionSwitch == 4){
-            temp = new Vector3(0,getRandomMovementValue(),0);
+            temp = new Vector3(0,getRandomYMovementValue(),0);
         }
         else if(motionSwitch == 5){
-            temp = new Vector3(getRandomMovementValue(),0,0);
+            temp = new Vector3(getRandomXMovementValue(),0,0);
         }
         
         return temp;
     }
 
-    private void FixedUpdate(){
+    private void Update(){
         //random movements
         if(Time.time >=nextMotion){
             nextMotion = Mathf.FloorToInt(Time.time) + 1;
@@ -67,10 +76,12 @@ public class enemy : character
             shoot();
         }
         UpdateMotor(randomMovement);
-        if(playerTransform.position.x > transform.position.x){
+        transform.rotation = playerTransform.position.x < this.transform.position.x ? Quaternion.Euler(0,180,0) : Quaternion.identity;
+        if(playerTransform.position.x > this.transform.position.x){
             barrel = new Vector3(0.15f,0,0);
+            //transform.rotation = Quaternion.identity;
         }
-        else if(playerTransform.position.x < transform.position.x){
+        else if(playerTransform.position.x < this.transform.position.x){
             barrel = new Vector3(-0.15f,0,0);
         }
     }
@@ -84,4 +95,6 @@ public class enemy : character
     private void shoot(){
         Instantiate(placeBulletHere, transform.position + barrel, transform.rotation);
     }
+
+
 }

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class player : character
 {
-    protected float playerXspeed = 1.0f;
-    protected float playerYspeed = 0.75f;
+    protected float playerXspeed = 0.6f;
+    protected float playerYspeed = 0.8f;
 
     //public float MovementSpeed = 1;
 
@@ -45,6 +45,7 @@ public class player : character
         if(!Mathf.Approximately(0,input.x))
             transform.rotation = input.x < 0 ? Quaternion.Euler(0,180,0) : Quaternion.identity;
         
+        /*
         hit = Physics2D.BoxCast(transform.position, boxCollider.size, 0, new Vector2(0, moveDelta.y), Mathf.Abs(moveDelta.y * Time.deltaTime), LayerMask.GetMask("Actor", "Blocking"));
         if(hit.collider == null){
             transform.position += moveDelta * Time.deltaTime;
@@ -58,8 +59,12 @@ public class player : character
             
             //transform.Translate(moveDelta.x * Time.deltaTime, 0, 0);
         }
-
-
+        */
+        hit = Physics2D.BoxCast(transform.position, boxCollider.size, 0, new Vector2(moveDelta.x, moveDelta.y), Mathf.Abs(moveDelta.x * Time.deltaTime), LayerMask.GetMask("Actor", "Blocking"));
+        if(hit.collider == null){
+            transform.position += moveDelta * Time.deltaTime;
+            //transform.Translate(moveDelta.x * Time.deltaTime, 0, 0);
+        }
     }
 
     private void Update(){

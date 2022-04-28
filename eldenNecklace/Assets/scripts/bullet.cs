@@ -9,8 +9,8 @@ public class bullet : collidable
     public float pushForce = 1.0f;
     private float bulletSpeed = 3.0f;
     private Transform playerTransform;
-    private bool onMotionL = false;
-    private bool onMotionR = false;
+    //private bool onMotionL = false;
+    //private bool onMotionR = false;
     public player player;
     
 
@@ -22,7 +22,8 @@ public class bullet : collidable
     }
 
     private void FixedUpdate(){
-        
+        transform.position += transform.right * Time.deltaTime * bulletSpeed;
+        /*
         if(playerTransform.localScale.x == 1){
             onMotionR = true;
             if(onMotionR && !onMotionL){
@@ -40,7 +41,7 @@ public class bullet : collidable
             if(onMotionR){
                 transform.Translate(bulletSpeed * Time.deltaTime, 0, 0);
             }
-        }
+        }*/
     }
 
     protected override void onCollide(Collider2D coll){
@@ -48,7 +49,6 @@ public class bullet : collidable
             if(coll.name == "Player"){
                 return;
             }
-
             //create a damage object and send to enemy
             damage dmg = new damage{
                 damageAmount = damagePoint,

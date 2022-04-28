@@ -36,7 +36,6 @@ public class weapon : MonoBehaviour
             barrel = new Vector3(0.13f,0,0);
         }    
         Instantiate(myPrefab, transform.position + barrel, transform.rotation);
-        Debug.Log(transform.rotation);
     }
 }
 

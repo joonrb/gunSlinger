@@ -18,18 +18,20 @@ public class enemyBullet : collidable
         playerTransform = GameObject.Find("player").transform;
     }
 
-    private void FixedUpdate(){
-        
+    protected override void Update(){
+        base.Update();
         /*if(playerTransform.position.x > transform.position.x){
             transform.position += -tranform.right * Time.deltaTime * bulletSpeed;
         }
         else if(playerTransform.position.x < transform.position.x){
             transform.Translate(-bulletSpeed * Time.deltaTime, 0, 0);
         }*/
-        transform.position += -transform.right * Time.deltaTime * bulletSpeed;
+
+        transform.position += transform.right * Time.deltaTime * bulletSpeed;
     }
 
     protected override void onCollide(Collider2D coll){
+        Debug.Log("BAM");
         if(coll.tag == "Character"){
             if(coll.name == "player"){
                 //create a damage object and send to enemy

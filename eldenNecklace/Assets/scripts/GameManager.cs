@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     public int exp;
 
     public void showText(string msg, int fontsize, Color color, Vector3 position, Vector3 motion, float duration){
-        floatingTextManager.Show(msg, fontsize, color, position, motion, duration);
+        floatingTextManager.show(msg, fontsize, color, position, motion, duration);
     }
 
     public void SaveState(){
